@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<!--
+For testing locally, run below:
+cd ~/Desktop/si-testing/
+python3 -m http.server
+User ID for qcorpus1: UR_e4ilMbT6sbsmZ6e
+-->
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualtrics Quick Tab Opener</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+    <title></title>
+    <!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
+
+<script type='text/javascript'>
+
+    (function(){var g=function(g){
+    
+    this.go=function(){var a=document.createElement("script");a.type="text/javascript";a.src=g;document.body&&document.body.appendChild(a)};
+    
+    this.start=function(){var t=this;"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",function(){t.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};};
+    
+    try{(new g("https://zn6xsvrmnasaxiwxa-qunivocalize.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_6XSvrmnasaXiWXA")).start()}catch(i){}})();
+    
+    </script><div id='ZN_6XSvrmnasaXiWXA'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+    
+    <!--END WEBSITE FEEDBACK SNIPPET-->
+  <script>
+    var QTest = "Testing";
+    var externalReference = "QSupport";
+    var extRef = "QSupport123456";
+    var Player_ID__c = "test@gmail.com"
+    if(typeof QSI === "undefined") {
+
+      QSI = {};
+
+      QSI.config = {
+
+        externalReference:extRef, 
+        contactEmbeddedData: {"Location":"Seattle"}, 
+        language:"English", 
+        firstName:"Jane", 
+        lastName:"Smith"
+
+      };
+
+}
+      // Your custom Qualtrics configuration code
+      (function() {
+          // You need to ensure 'data' is defined somewhere in your page
+          // For example:
+          // var data = { Contact: { Player_ID__c: "12345" } };
+          
+          this.fedId = Player_ID__c;
+
+          //set the qualtrics config object
+          if(typeof window.QSI === 'undefined') {
+              window.QSI = {};
+          }
+          else {
+              //reload the qualtrics survey script so it can pick up the new config after the "onload" event
+              window.QSI.API.unload();
+              window.QSI.API.load();
+              window.QSI.API.run();
+          }
+
+          //set the qualtrics config object to populate the external reference with player id
+          window.QSI.config = {
+            externalReference:"test123", 
+            contactEmbeddedData: {"Location":"Seattle"}, 
+            language:"English", 
+            firstName:"Jane", 
+            lastName:"Smith"
+          };
+      })();
+  </script>
+    
+  </head>
+  <body>
+    <h1>Local Test Site</h1>
+    <button id="hello">hello button</button>
+    <button id="myButton">Click Me</button>
+    <button>test</button>
+    <script>
+      // Add click event listener to button
+      document.getElementById('myButton').addEventListener('click', function() {
+          var dxaEvent = new CustomEvent("newCheckingaccount", {bubbles: true});
+          document.dispatchEvent(dxaEvent);
+      });
+
+      // Listen for the custom event
+      document.addEventListener('newCheckingaccount', function(e) {
+          console.log('New checking account event triggered!');
+          // Add your event handling code here
+      });
+  </script>
+  <div class="w-full max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+    <div class="mb-6 text-center">
+        <svg class="mx-auto h-12 w-auto text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-6.75M21 3v6.75" />
+        </svg>
+        <h1 class="mt-4 text-2xl font-bold text-gray-900">Qualtrics Quick Tab Opener</h1>
+        <p class="mt-2 text-sm text-gray-600">Paste any Qualtrics URL to find SV and/or TS IDs.</p>
+    </div>
+
+    <!-- Unified Input Section -->
+    <div class="flex flex-col sm:flex-row gap-2">
+        <input type="text" id="urlInput" placeholder="Paste any Qualtrics URL..." class="flex-grow w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+        <button id="clearBtn" class="px-4 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-semibold transition-colors">Clear</button>
+    </div>
+    <div class="mt-4 space-y-2">
+        <button id="generateBtn" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700">Generate Links</button>
+        <button id="openTabsBtn" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 hidden">Open Selected Tabs</button>
+    </div>
+
+    <!-- Results and Error Messages -->
+    <div id="messageArea" class="mt-4 text-center"></div>
+
+    <!-- Generated Links Area -->
+    <div id="generatedContentContainer" class="mt-6 space-y-3 hidden">
+        <div class="flex justify-between items-center border-b pb-2 mb-2">
+             <h2 class="text-lg font-semibold text-gray-800">Generated Links</h2>
+             <div>
+                <input type="checkbox" id="selectAllCheckbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                <label for="selectAllCheckbox" class="ml-2 text-sm font-medium text-gray-700">Select All</label>
+             </div>
+        </div>
+        <div id="linksList" class="space-y-3"></div>
+    </div>
+    
+    <div id="popup-warning" class="mt-4 p-3 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-700 rounded-r-lg hidden">
+        <p class="text-sm">Your browser might block pop-ups. Please allow pop-ups for this site if tabs don't open.</p>
+    </div>
+</div>
+
+<script>
+    // --- Template Object ---
+    // 'requires' array tells the app which IDs must be present in the URL to generate the link.
+    const URL_TEMPLATES = [
+        // These links primarily use the SV ID
+        { name: 'Survey Editor', template: 'Q/EditSection/Blocks?SurveyID={svId}', requires: ['sv'] },
+        { name: '360 Survey Editor', template: 'EX/EditSurveyEX/Blocks?ProjectID={tsId}', requires: ['ts'] },
+        { name: '360 Workflows', template: 'workflows/ui/{tsId}/{svId}/list', requires: ['ts'] },
+        { name: 'Workflows', template: 'workflows/ui/{svId}/{svId}/list', requires: ['sv'] },
+        { name: 'Survey Distributions', template: 'Q/DistributeSection?ContextSurveyID={svId}', requires: ['sv'] },
+        { name: 'Participants', template: 'EX/ParticipantsEI/ParticipantList?ProjectID={tsId}', requires: ['ts'] },
+        { name: 'Messages', template: 'EX/MessagesEI/EmailAlerts?ProjectID={tsId}', requires: ['ts'] },
+        { name: 'Survey Data & Analysis', template: 'responses/#/surveys/{svId}', requires: ['sv'] },
+        { name: '360 Data & Analysis', template: 'responses/#/surveys/{svId}?eiProjectId={tsId}&eiProjectType=ThreeSixtyProject', requires: ['ts'] },
+        { name: 'Survey Results & Dashboards', template: 'results/results-dashboards/survey/{svId}/?surveyId={svId}', requires: ['sv'] },
+        { name: 'Survey Reports', template: 'reports/view/{svId}', requires: ['sv'] },
+        { name: '360 Reports', template: 'reports/360/view/{svId}?projectId={tsId}', requires: ['ts'] },
+        { name: '360 Participant Portal', template: 'EX/ParticipantPortal?ThreeSixtyID={tsId}', requires: ['ts'] },
+        { name: '360 Dashboards', template: 'your-dashboards/projects/threesixty-dashboards?surveyId={svId}&projectId={tsId}', requires: ['ts'] },
+
+        // This link primarily uses the TS ID
+        
+        // These links can use both
+    ];
+
+    // --- DOM Element References ---
+    const urlInput = document.getElementById('urlInput');
+    const generateBtn = document.getElementById('generateBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const openTabsBtn = document.getElementById('openTabsBtn');
+    const messageArea = document.getElementById('messageArea');
+    const generatedContentContainer = document.getElementById('generatedContentContainer');
+    const linksList = document.getElementById('linksList');
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    const popupWarning = document.getElementById('popup-warning');
+    
+    // --- Event Listeners ---
+    generateBtn.addEventListener('click', handleGenerateLinks);
+    clearBtn.addEventListener('click', handleClear);
+    openTabsBtn.addEventListener('click', handleOpenTabs);
+    selectAllCheckbox.addEventListener('change', handleSelectAll);
+    
+    // --- Core Logic ---
+    function handleGenerateLinks() {
+        const url = urlInput.value.trim();
+        if (!url) {
+            showMessage('Please paste a URL first.', 'error');
+            return;
+        }
+
+        // Regular expressions to find IDs and domain
+        const svRegex = /(SV_\w+)/;
+        const tsRegex = /(TS_\w+)/;
+        const domainRegex = /(https?:\/\/[^/]+)/;
+
+        const svMatch = url.match(svRegex);
+        const tsMatch = url.match(tsRegex);
+        const domainMatch = url.match(domainRegex);
+
+        const svId = svMatch ? svMatch[0] : null;
+        const tsId = tsMatch ? tsMatch[0] : null;
+        const domain = domainMatch ? domainMatch[0] : null;
+
+        if ((!svId && !tsId) || !domain) {
+            showMessage('Could not find a valid SV/TS ID or domain in the URL.', 'error');
+            generatedContentContainer.classList.add('hidden');
+            openTabsBtn.classList.add('hidden');
+            return;
+        }
+
+        let messageParts = ['Successfully found:'];
+        if (svId) messageParts.push(`SV ID (${svId})`);
+        if (tsId) messageParts.push(`TS ID (${tsId})`);
+        showMessage(messageParts.join(' '), 'success');
+
+        displayGeneratedLinks(domain, svId, tsId);
+    }
+
+    function displayGeneratedLinks(domain, svId, tsId) {
+        linksList.innerHTML = ''; 
+
+        const availableTemplates = URL_TEMPLATES.filter(item => {
+            const svRequired = item.requires.includes('sv');
+            const tsRequired = item.requires.includes('ts');
+
+            // Condition 1: If the template requires an ID, we must have found it.
+            if (svRequired && !svId) return false;
+            if (tsRequired && !tsId) return false;
+            
+            // Condition 2: If a TS ID was found, only show links that require a TS ID.
+            if (tsId && !tsRequired) {
+                return false;
+            }
+            
+            return true; // All conditions met
+        });
+
+        if (availableTemplates.length === 0) {
+            showMessage('No applicable links could be generated for the found ID(s).', 'error');
+            generatedContentContainer.classList.add('hidden');
+            openTabsBtn.classList.add('hidden');
+            return;
+        }
+        
+        availableTemplates.forEach((item, index) => {
+            let finalUrl = `${domain}/${item.template}`;
+            if (svId) {
+                finalUrl = finalUrl.replace(/{svId}/g, svId);
+            }
+            if (tsId) {
+                finalUrl = finalUrl.replace(/{tsId}/g, tsId);
+            }
+            const linkElement = document.createElement('div');
+            linkElement.className = 'flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200';
+            linkElement.innerHTML = `
+                <input id="link-checkbox-${index}" type="checkbox" data-url="${finalUrl}" class="link-checkbox h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked>
+                <label for="link-checkbox-${index}" class="ml-3 flex-grow">
+                    <span class="font-semibold text-gray-800">${item.name}</span>
+                    <p class="text-xs text-gray-500 break-all">${finalUrl}</p>
+                </label>`;
+            linksList.appendChild(linkElement);
+        });
+        
+        selectAllCheckbox.checked = true;
+        generatedContentContainer.classList.remove('hidden');
+        openTabsBtn.classList.remove('hidden');
+        popupWarning.classList.remove('hidden');
+    }
+
+    function handleOpenTabs() {
+        const selectedCheckboxes = document.querySelectorAll('.link-checkbox:checked');
+        if (selectedCheckboxes.length === 0) {
+            showMessage('Please select at least one link to open.', 'error');
+            return;
+        }
+        selectedCheckboxes.forEach(checkbox => window.open(checkbox.getAttribute('data-url'), '_blank'));
+        showMessage(`Attempting to open ${selectedCheckboxes.length} tab(s)...`, 'success');
+    }
+
+    function handleClear() {
+        urlInput.value = '';
+        generatedContentContainer.classList.add('hidden');
+        openTabsBtn.classList.add('hidden');
+        messageArea.innerHTML = '';
+        popupWarning.classList.add('hidden');
+        urlInput.focus();
+    }
+
+    function handleSelectAll() {
+        const isChecked = selectAllCheckbox.checked;
+        const allCheckboxes = document.querySelectorAll('.link-checkbox');
+        allCheckboxes.forEach(checkbox => checkbox.checked = isChecked);
+    }
+
+    function showMessage(text, level = 'success') {
+        messageArea.innerHTML = '';
+        const messageEl = document.createElement('p');
+        messageEl.textContent = text;
+        messageEl.className = level === 'error' ? 'text-red-600 text-sm' : 'text-blue-600 text-sm';
+        messageArea.appendChild(messageEl);
+    }
+</script>
+  </body>
+</html>
